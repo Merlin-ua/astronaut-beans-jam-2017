@@ -30,6 +30,8 @@ public class Player : MonoBehaviour {
     private float invincibleTimer = 0f;
     private float invincibleTimerMax = 3.0f;
 
+    private float score = 0f;
+
     private void Awake() {
         rigidbody2D = GetComponent<Rigidbody2D>();
         playerLayerMask |= (1 << LayerMask.NameToLayer("Player"));
@@ -95,6 +97,8 @@ public class Player : MonoBehaviour {
         } else {
             playerSpriteRenderer.enabled = true;
         }
+
+        score += Time.deltaTime * 10.0f;
     }
 
     public bool IsGrounded() {
@@ -129,5 +133,9 @@ public class Player : MonoBehaviour {
 
     public Vector2 GetVelocity() {
         return rigidbody2D.velocity;
+    }
+
+    public int GetScore() {
+        return Mathf.FloorToInt(score);
     }
 }

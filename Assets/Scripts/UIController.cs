@@ -9,6 +9,7 @@ public class UIController : MonoBehaviour {
     public Image[] hearts;
     public Text gameoverSign;
     public Text scoreSign;
+    public Text gameScore;
 
     void Awake() {
         gameoverSign.enabled = false;
@@ -20,6 +21,7 @@ public class UIController : MonoBehaviour {
 	}
 	
 	void Update () {
+        gameScore.text = playerScript.GetScore().ToString();
         // update jeptack bar
         jetpackValueScrollbar.size = playerScript.GetFuelRatio();
 
@@ -30,7 +32,7 @@ public class UIController : MonoBehaviour {
 
         // gameover check
         if(playerScript.GetLives() <= 0) {
-            scoreSign.text = "You ran " + Mathf.FloorToInt(playerScript.transform.position.x) + " meters";
+            scoreSign.text = "You ran " + playerScript.GetScore().ToString() + " meters";
             if (!gameoverSign.enabled) {
                 gameoverSign.enabled = true;
             }
